@@ -1,5 +1,0 @@
-#to create deployment> after installing kubernetes in local system
-kubectl apply -f deployment.yaml
-
-#to see deployemnts:
-kubectl get deployments

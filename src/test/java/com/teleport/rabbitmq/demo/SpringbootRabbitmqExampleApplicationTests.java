@@ -1,10 +1,10 @@
-package com.teleport.k8s;
+package com.teleport.rabbitmq.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringbootK8sDemoApplicationTests {
+class SpringbootRabbitmqExampleApplicationTests {
 
 	@Test
 	void contextLoads() {
