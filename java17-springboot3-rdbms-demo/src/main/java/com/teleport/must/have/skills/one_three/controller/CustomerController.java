@@ -6,6 +6,7 @@ import com.teleport.must.have.skills.one_three.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -39,6 +40,11 @@ public class CustomerController {
     @GetMapping("/with-orders")
     public ResponseEntity<List<Customer>> getWithOrders(@RequestParam String name) {
         return ResponseEntity.ok(customerService.getCustomersWithOrders(name));
+    }
+
+    @GetMapping(value = "/orders/stream", produces = "text/event-stream")
+    public Flux<Order> streamOrders() {
+        return customerService.streamOrders();
     }
 
 }

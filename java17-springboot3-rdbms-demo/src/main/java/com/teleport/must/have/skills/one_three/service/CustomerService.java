@@ -11,15 +11,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class CustomerService {
     private static final Logger logger = LoggerFactory.getLogger(CustomerService.class);
     private final CustomerRepository customerRepo;
     private final OrderRepository orderRepo;
+    private final String[] statuses = {"CREATED", "PACKING", "SHIPPED", "DELIVERED"};
 
     private final UserEventProducer userEventProducer;
 
@@ -70,6 +75,20 @@ public class CustomerService {
 
     public List<Customer> getAllCustomer() {
         return customerRepo.findAll();
+    }
+
+    public Flux<Order> streamOrders() {
+        return Flux.interval(Duration.ofSeconds(1))
+                .map(this::generateOrder)
+                .take(20); // simulate 20 updates
+    }
+
+    private Order generateOrder(long index) {
+        Random random = new Random();
+        long orderId = random.nextLong();
+        String status = statuses[(int) (index % statuses.length)];
+        Customer customer = new Customer("customer name1");
+        return new Order(orderId, "product-status"+status, customer);
     }
 
 }

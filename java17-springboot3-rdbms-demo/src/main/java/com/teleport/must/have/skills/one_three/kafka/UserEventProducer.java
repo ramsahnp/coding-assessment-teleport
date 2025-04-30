@@ -20,7 +20,7 @@ public class UserEventProducer {
     }
 
     public void sendMessage(String message) {
-        logger.info("-------------------------------------------------------"+message);
+        logger.info("-------------------------------------------------------{}",message);
         kafkaTemplate.send(KafkaUtils.TOPIC, message);
     }
 }
