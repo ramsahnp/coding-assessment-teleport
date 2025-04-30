@@ -1,5 +1,0 @@
-spring:
-  data:
-    mongodb:
-      uri : mongodb+srv://admin:admin@ramsahnp-cluster-0.vvsqb1c.mongodb.net/?retryWrites=true&w=majority&appName=ramsahnp-cluster-0
-      database : Task
